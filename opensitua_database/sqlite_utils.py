@@ -20,13 +20,7 @@
 #
 # Author:      Luzzi Valerio
 #
-# Created:    08/07/2019
+# Created:    11/09/2019
 #-------------------------------------------------------------------------------
 
 
-__version__ = '0.0.7'
-
-def get_version():
-    return __version__
-
-from .sqlitedb import *
