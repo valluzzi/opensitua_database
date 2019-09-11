@@ -24,16 +24,7 @@
 # ------------------------------------------------------------------------------
 import os,sys,re
 import hashlib
-
-def __MD5__(text):
-    """
-    md5 - Returns the md5 of the text
-    """
-    if (text!=None):
-        hash = hashlib.md5()
-        hash.update(text)
-        return hash.hexdigest()
-    return None
+from .sqlite_utils import *
 
 
 class UsersDB(SqliteDB)
