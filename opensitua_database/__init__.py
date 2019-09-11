@@ -24,9 +24,9 @@
 #-------------------------------------------------------------------------------
 
 
-__version__ = '0.0.5'
+__version__ = '0.0.6'
 
 def get_version():
     return __version__
 
-from .abstractdb import *
+from .sqlitedb import *

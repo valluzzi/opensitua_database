@@ -23,6 +23,7 @@
 # Created:     31/07/2018
 # ------------------------------------------------------------------------------
 import os,sys,re
+import time
 import sqlite3 as sqlite
 from opensitua_core import *
 
@@ -37,14 +38,14 @@ class SqliteDB:
         mkdirs(justpath(dsn))
         self.dsn = dsn
         self.conn = None
-
+        self.__connect__()
         self.pragma("synchronous=OFF", verbose=verbose)
         self.pragma("journal_mode=WAL", verbose=verbose)
         self.pragma("foreign_keys=ON", verbose=verbose)
         self.pragma("cache_size=4000", verbose=verbose)
         self.load_extension(modules, verbose=verbose)
         self.conn.enable_load_extension(True)
-        self.__connect__()
+
 
     def close(self, verbose=False):
         """
@@ -266,3 +267,36 @@ class SqliteDB:
                 return res
 
         return rows
+
+
+    def executeMany(self, sql, env={}, values=[], commit=True, verbose=False):
+        """
+        Make a query statetment
+        Returns a cursor
+        """
+        cursor = self.__get_cursor__()
+        line = sformat(sql, env)
+        try:
+            t1 = time.time()
+            cursor.executemany(line, values)
+            if commit:
+                self.conn.commit()
+            t2 = time.time()
+            if verbose:
+                line = line.replace("\n", " ")
+                print("->%s:Done in (%.2f)s" % (line[:], (t2 - t1)))
+
+        except Exception as ex:
+            line = line.replace("\n", " ")
+            print( "No!:SQL Exception:%s :(%s)"%(line,ex))
+
+    def list(self, verbose=False):
+        """
+        list tables
+        """
+        sql = """
+        SELECT [tbl_name] FROM [sqlite_master] WHERE LOWER([type]) in ('table','view')
+        UNION ALL
+        SELECT [tbl_name] FROM [sqlite_temp_master] WHERE LOWER([type]) in ('table','view');
+        """
+        return self.execute(sql, {}, outputmode="array", verbose=verbose)
