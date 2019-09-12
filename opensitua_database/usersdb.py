@@ -24,10 +24,11 @@
 # ------------------------------------------------------------------------------
 import os,sys,re
 import hashlib
+from .sqlitedb import *
 from .sqlite_utils import *
 
 
-class UsersDB(SqliteDB)
+class UsersDB(SqliteDB):
     """
     UsersDB - a class with common base methods
     """
@@ -36,7 +37,7 @@ class UsersDB(SqliteDB)
         Constructor
         """
         SqliteDB.__init__(self, dsn)
-        self.create_function("md5", 1, __MD5__ )
+        self.create_function("md5", 1, sqlite_md5 )
         self.__create_structure__(verbose)
 
     def __create_structure__(self, verbose=False):
