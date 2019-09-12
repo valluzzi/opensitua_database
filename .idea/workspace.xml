@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensitua_database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,7 +28,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
+            <state relative-caret-position="460">
               <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
             </state>
           </provider>
@@ -48,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1683">
-              <caret line="102" column="50" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="50" />
+            <state relative-caret-position="-3162">
+              <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -60,8 +58,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="539">
-              <caret line="39" column="49" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+            <state relative-caret-position="86">
+              <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -83,18 +81,18 @@
       <list>
         <option value="$PROJECT_DIR$/opensitua_database/module.py" />
         <option value="$PROJECT_DIR$/setup.py" />
-        <option value="$PROJECT_DIR$/opensitua_database/sqlitedb.py" />
         <option value="$PROJECT_DIR$/opensitua_database/__init__.py" />
         <option value="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" />
+        <option value="$PROJECT_DIR$/opensitua_database/sqlitedb.py" />
         <option value="$PROJECT_DIR$/opensitua_database/usersdb.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1565" />
-    <option name="y" value="-95" />
-    <option name="width" value="1382" />
-    <option name="height" value="754" />
+    <option name="x" value="-6" />
+    <option name="y" value="1" />
+    <option name="width" value="1378" />
+    <option name="height" value="743" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -160,10 +158,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-6" y="1" width="1378" height="743" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25416037" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25872535" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -195,13 +193,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opensitua_database/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/sqlite_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
@@ -209,10 +200,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/opensitua_database/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1683">
-          <caret line="102" column="50" selection-start-line="102" selection-start-column="8" selection-end-line="102" selection-end-column="50" />
+        <state relative-caret-position="-3162">
+          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>
@@ -221,8 +219,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="539">
-          <caret line="39" column="49" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
+        <state relative-caret-position="86">
+          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>
