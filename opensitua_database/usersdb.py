@@ -23,7 +23,7 @@
 # Created:     31/07/2018
 # ------------------------------------------------------------------------------
 import os,sys,re
-import hashlib
+import hashlib,random
 from .sqlitedb import *
 from .sqlite_utils import *
 from opensitua_core import *

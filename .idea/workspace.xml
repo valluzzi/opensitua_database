@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,11 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
-              <folding>
-                <element signature="e#928#944#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -219,11 +215,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
-          <folding>
-            <element signature="e#928#944#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="25" column="21" selection-start-line="25" selection-start-column="21" selection-end-line="25" selection-end-column="21" />
         </state>
       </provider>
     </entry>
