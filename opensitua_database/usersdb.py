@@ -40,6 +40,7 @@ class UsersDB(SqliteDB):
         SqliteDB.__init__(self, dsn)
         self.create_function("md5", 1, sqlite_md5 )
         self.__create_structure__(verbose)
+        self.fileconf = fileconf
 
 
     def __create_structure__(self, verbose=False):
