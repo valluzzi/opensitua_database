@@ -83,7 +83,7 @@ class UsersDB(SqliteDB):
         if administrators and sendmail and isfile(self.fileconf):
             text = """</br>
                    <b>{name}</b> ask you to grant access to the Web Tool.</br>
-                   If you want to enable <b>{name}</b> aka <b>{mail}<b> click on the following link:</br>
+                   If you want to enable <b>{name}</b> aka <b>{mail}</b> click on the following link:</br>
                    <a href='http://localhost/common/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
                    """
             system_mail(administrators, sformat(text, env), sformat("""User confirmation of {name}""", env), self.fileconf)
