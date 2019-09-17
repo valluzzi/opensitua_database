@@ -57,7 +57,7 @@ class UsersDB(SqliteDB):
         );"""
         self.execute(sql)
 
-    def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, verbose=False):
+    def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, url="http://localhost", verbose=False):
         """
         addUser
         """
@@ -67,7 +67,8 @@ class UsersDB(SqliteDB):
             "name": name if name else mail,
             "password": password,
             "role":role,
-            "enabled":1 if enabled else 0
+            "enabled":1 if enabled else 0,
+            "url":url
         }
         sql= """
         INSERT OR IGNORE INTO [users]([mail],[name],[token],[role],[enabled]) VALUES('{mail}','{name}',md5('{mail}'||'{password}'),'{role}',{enabled});
@@ -84,7 +85,7 @@ class UsersDB(SqliteDB):
             text = """</br>
                    <b>{name}</b> ask you to grant access to the Web Tool.</br>
                    If you want to enable <b>{name}</b> aka <b>{mail}</b> click on the following link:</br>
-                   <a href='/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
+                   <a href='http://{url}/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
                    """
             system_mail(administrators, sformat(text, env), sformat("""User confirmation of {name}""", env), self.fileconf)
 
