@@ -125,3 +125,19 @@ class UsersDB(SqliteDB):
             return user
 
         return False
+
+    def getToken(self,username, password):
+        """
+        getToken
+        """
+        env = {
+            "username": username,
+            "password": password
+        }
+        sql = """
+        SELECT md5([token]||strftime('%Y-%m-%d','now')) FROM [users]
+            WHERE ([name] LIKE '{username}' OR [mail] LIKE '{username}')
+            AND [token] LIKE md5([mail]||'{password}')
+            AND [enabled];
+        """
+        return self.execute(sql,env,outputmode="scalar",verbose=False)
