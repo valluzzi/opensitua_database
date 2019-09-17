@@ -84,8 +84,42 @@ class UsersDB(SqliteDB):
             text = """</br>
                    <b>{name}</b> ask you to grant access to the Web Tool.</br>
                    If you want to enable <b>{name}</b> aka <b>{mail}</b> click on the following link:</br>
-                   <a href='http://localhost/common/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
+                   <a href='/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
                    """
             system_mail(administrators, sformat(text, env), sformat("""User confirmation of {name}""", env), self.fileconf)
 
         return __token__
+
+    def enableUser(self, token, enabled=1, sendmail=False, verbose=False):
+        """
+        enableUser
+        """
+        env ={
+            "token":token,
+            "enabled":1 if enabled else 0,
+            "password":  sqlite_md5("%s"%randint(0,10000))[:5]
+        }
+        sql = """
+        UPDATE [users] SET [enabled]={enabled},[token]=md5([mail]||'{password}') WHERE [token]='{token}';
+        SELECT [mail],[name],[enabled] FROM [users]  WHERE [token]=md5([mail]||'{password}');
+        """
+        (mail,name,enabled) = self.execute(sql, env, outputmode='first-row', verbose=verbose)
+
+        # A mail to the user
+        if mail:
+            user = {
+                "name":name,
+                "mail":mail,
+                "enabled":enabled,
+                "password":env["password"]
+            }
+            text = """</br>
+                    Login at <a href='/webgis/private/{mail}'>http://localhost/webgis/</a></br>
+                    Your password is:<b>{password}</b></br>
+                    """
+
+            if sendmail and isfile(self.fileconf):
+                system_mail(mail, sformat(text, user), "User Credentials for the Webgis.", self.fileconf,verbose=verbose)
+            return user
+
+        return False
