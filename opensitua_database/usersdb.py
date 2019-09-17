@@ -91,7 +91,7 @@ class UsersDB(SqliteDB):
 
         return __token__
 
-    def enableUser(self, token, enabled=1, sendmail=False, verbose=False):
+    def enableUser(self, token, enabled=1, sendmail=False, url="localhost", verbose=False):
         """
         enableUser
         """
@@ -112,10 +112,11 @@ class UsersDB(SqliteDB):
                 "name":name,
                 "mail":mail,
                 "enabled":enabled,
-                "password":env["password"]
+                "password":env["password"],
+                "url":url
             }
             text = """</br>
-                    Login at <a href='/webgis/private/{mail}'>http://localhost/webgis/</a></br>
+                    Login at <a href='http://{url}/webgis/private/{mail}'>http://localhost/webgis/</a></br>
                     Your password is:<b>{password}</b></br>
                     """
 
