@@ -151,6 +151,6 @@ class UsersDB(SqliteDB):
             "__token__": token
         }
         sql = """
-        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' WHERE [mail] LIKE '{__username__}' LIMIT 1;
+        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' FROM [users] WHERE [mail] LIKE '{__username__}' LIMIT 1;
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)

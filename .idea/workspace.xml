@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="" />
+    <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,8 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="626">
-              <caret line="144" column="18" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="18" />
+            <state relative-caret-position="779">
+              <caret line="153" column="81" selection-start-line="153" selection-start-column="81" selection-end-line="153" selection-end-column="81" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -239,8 +241,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="626">
-          <caret line="144" column="18" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="18" />
+        <state relative-caret-position="779">
+          <caret line="153" column="81" selection-start-line="153" selection-start-column="81" selection-end-line="153" selection-end-column="81" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>
