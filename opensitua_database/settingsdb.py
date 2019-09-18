@@ -29,7 +29,7 @@ from .sqlite_utils import *
 
 class SettingsDB(SqliteDB):
     """
-    UsersDB - a class with common base methods
+    SettingsDB - a class with common base methods
     """
     def __init__(self, dsn=":memory:", modules="", verbose=False):
         """
