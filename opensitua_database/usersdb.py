@@ -115,8 +115,9 @@ class UsersDB(SqliteDB):
                 "password":env["password"],
                 "url":url
             }
+            #Login at <a href='http://{url}/webgis/private/{mail}'>http://localhost/webgis/</a></br>
             text = """</br>
-                    Login at <a href='http://{url}/webgis/private/{mail}'>http://localhost/webgis/</a></br>
+                    Login at <a href='{url}'>{url}</a></br>
                     Your password is:<b>{password}</b></br>
                     """
 
