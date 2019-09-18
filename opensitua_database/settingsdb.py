@@ -55,7 +55,7 @@ class SettingsDB(SqliteDB):
         """
         set - add or update a key,value tuple
         """
-        sql ="""INSERT OR REPLACE [settings]([key],[value],[type]) VALUES(?,?,?);"""
+        sql ="""INSERT OR REPLACE INTO [settings]([key],[value],[type]) VALUES(?,?,?);"""
         self.executeMany(sql,{},[(key,value,type)])
 
     def get(self,key):
