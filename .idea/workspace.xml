@@ -43,7 +43,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4556">
+            <state relative-caret-position="881">
               <caret line="271" column="19" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="19" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
@@ -55,8 +55,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14">
-              <caret line="28" column="19" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="626">
+              <caret line="144" column="18" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="18" />
+              <folding>
+                <element signature="e#928#944#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -214,16 +217,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4556">
-          <caret line="271" column="19" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="19" />
-          <folding>
-            <element signature="e#928#944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="677">
@@ -234,10 +227,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="881">
+          <caret line="271" column="19" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="19" />
+          <folding>
+            <element signature="e#928#944#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14">
-          <caret line="28" column="19" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="19" />
+        <state relative-caret-position="626">
+          <caret line="144" column="18" selection-start-line="144" selection-start-column="8" selection-end-line="144" selection-end-column="18" />
+          <folding>
+            <element signature="e#928#944#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

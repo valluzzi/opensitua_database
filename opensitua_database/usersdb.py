@@ -142,7 +142,7 @@ class UsersDB(SqliteDB):
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
 
-    def checkToken(self, username, token):
+    def isValid(self, username, token):
         """
         checkToken -  check token is valid
         """
