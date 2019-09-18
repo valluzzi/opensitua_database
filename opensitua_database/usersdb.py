@@ -26,7 +26,7 @@ import os,sys,re
 from random import randint
 from .sqlitedb import *
 from .sqlite_utils import *
-from opensitua_core import *
+from opensitua_core import system_mail,sformat
 
 
 class UsersDB(SqliteDB):
@@ -120,7 +120,7 @@ class UsersDB(SqliteDB):
                     Your password is:<b>{password}</b></br>
                     """
 
-            if sendmail and isfile(self.fileconf):
+            if sendmail and os.path.isfile(self.fileconf):
                 system_mail(mail, sformat(text, user), "User Credentials for the Webgis.", self.fileconf,verbose=verbose)
             return user
 
