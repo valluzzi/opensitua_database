@@ -24,7 +24,7 @@
 #-------------------------------------------------------------------------------
 
 
-__version__ = '0.0.24'
+__version__ = '0.0.25'
 
 def get_version():
     return __version__
@@ -32,3 +32,4 @@ def get_version():
 
 from .sqlitedb import *
 from .usersdb import *
+from .settingsdb import *

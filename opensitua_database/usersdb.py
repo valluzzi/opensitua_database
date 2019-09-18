@@ -140,4 +140,4 @@ class UsersDB(SqliteDB):
             AND [token] LIKE md5([mail]||'{password}')
             AND [enabled];
         """
-        return self.execute(sql,env,outputmode="scalar",verbose=False)
+        return self.execute(sql, env, outputmode="scalar", verbose=False)

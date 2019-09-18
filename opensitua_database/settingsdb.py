@@ -1,0 +1,66 @@
+# ------------------------------------------------------------------------------
+# Licence:
+# Copyright (c) 2012-2020 Luzzi Valerio
+#
+# The above copyright notice and this permission notice shall be
+# included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+#
+#
+# Name:        settingsdb.py
+# Purpose:
+#
+# Author:      Luzzi Valerio
+#
+# Created:     18/09/2019
+# ------------------------------------------------------------------------------
+import os,sys,re
+from .sqlitedb import *
+from .sqlite_utils import *
+
+
+class SettingsDB(SqliteDB):
+    """
+    UsersDB - a class with common base methods
+    """
+    def __init__(self, dsn=":memory:", modules="", verbose=False):
+        """
+        Constructor
+        """
+        SqliteDB.__init__(self, dsn)
+        #self.create_function("md5", 1, sqlite_md5 )
+        self.__create_structure__(verbose)
+
+    def __create_structure__(self, verbose=False):
+        """
+        __create_structure__
+        """
+        sql = """
+        CREATE TABLE IF NOT EXISTS [settings](
+            key    TEXT PRIMARY KEY,
+            value  TEXT DEFAULT NULL, 
+            [type] TEXT DEFAULT 'string'
+        );"""
+        self.execute(sql)
+
+    def set(self, key, value, type='string'):
+        """
+        set - add or update a key,value tuple
+        """
+        sql ="""INSERT OR REPLACE [settings]([key],[value],[type]) VALUES(?,?,?);"""
+        self.executeMany(sql,{},[(key,value,type)])
+
+    def get(self,key):
+        """
+        get - get a key, value
+        """
+        (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE [key] LIKE '{key}' LIMIT 1;""",{"key":key},outputmode="first-row")
+        return value
