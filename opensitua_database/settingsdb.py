@@ -45,22 +45,24 @@ class SettingsDB(SqliteDB):
         """
         sql = """
         CREATE TABLE IF NOT EXISTS [settings](
-            key    TEXT PRIMARY KEY,
+            key    TEXT,
             value  TEXT DEFAULT NULL, 
-            [type] TEXT DEFAULT 'string'
+            [type] TEXT DEFAULT 'string',
+            [groupname] TEXT DEFAULT 'General',
+            PRIMARY KEY([key],[groupname])
         );"""
         self.execute(sql)
 
-    def set(self, key, value, type='string'):
+    def set(self, key, value, type='string', groupname='General'):
         """
         set - add or update a key,value tuple
         """
-        sql ="""INSERT OR REPLACE INTO [settings]([key],[value],[type]) VALUES(?,?,?);"""
-        self.executeMany(sql,{},[(key,value,type)])
+        sql ="""INSERT OR REPLACE INTO [settings]([key],[value],[type],[groupname]) VALUES(?,?,?,?);"""
+        self.executeMany(sql,{},[(key,value,type,groupname)])
 
-    def get(self,key):
+    def get(self, key, groupname='General'):
         """
         get - get a key, value
         """
-        (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE [key] LIKE '{key}' LIMIT 1;""",{"key":key},outputmode="first-row")
+        (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE [key] LIKE '{key}' AND [groupname]='{groupname}' LIMIT 1;""",{"key":key,"groupname":groupname},outputmode="first-row")
         return value

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/settingsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/settingsdb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,7 +46,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="881">
+            <state relative-caret-position="4556">
               <caret line="271" column="19" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="19" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
@@ -55,7 +55,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="609">
@@ -67,11 +67,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="677">
-              <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
+            <state relative-caret-position="830">
+              <caret line="66" column="176" selection-start-line="66" selection-start-column="176" selection-end-line="66" selection-end-column="176" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -96,8 +96,8 @@
         <option value="$PROJECT_DIR$/opensitua_database/sqlitedb.py" />
         <option value="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" />
         <option value="$PROJECT_DIR$/opensitua_database/__init__.py" />
-        <option value="$PROJECT_DIR$/opensitua_database/settingsdb.py" />
         <option value="$PROJECT_DIR$/opensitua_database/usersdb.py" />
+        <option value="$PROJECT_DIR$/opensitua_database/settingsdb.py" />
       </list>
     </option>
   </component>
@@ -174,7 +174,7 @@
     <frame x="-545" y="-1088" width="2576" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.0918124" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.09260731" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -220,19 +220,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="677">
-          <caret line="57" column="39" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-          <folding>
-            <element signature="e#928#944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="881">
+        <state relative-caret-position="4556">
           <caret line="271" column="19" selection-start-line="271" selection-start-column="8" selection-end-line="271" selection-end-column="19" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
@@ -244,6 +234,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="609">
           <caret line="119" column="49" selection-start-line="119" selection-start-column="49" selection-end-line="119" selection-end-column="49" />
+          <folding>
+            <element signature="e#928#944#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="830">
+          <caret line="66" column="176" selection-start-line="66" selection-start-column="176" selection-end-line="66" selection-end-column="176" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>
