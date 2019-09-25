@@ -57,7 +57,7 @@ class UsersDB(SqliteDB):
         );"""
         self.execute(sql)
 
-    def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, url="localhost", verbose=False):
+    def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, url="localhost", extra="", verbose=False):
         """
         addUser
         """
@@ -87,6 +87,7 @@ class UsersDB(SqliteDB):
                    If you want to enable <b>{name}</b> aka <b>{mail}</b> click on the following link:</br>
                    <a href='http://{url}/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
                    """
+            text+= "%s"%(extra)
             system_mail(administrators, sformat(text, env), sformat("""User confirmation of {name}""", env), self.fileconf)
 
         return __token__
