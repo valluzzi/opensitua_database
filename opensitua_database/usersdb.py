@@ -82,13 +82,9 @@ class UsersDB(SqliteDB):
                                outputmode="scalar", verbose=verbose)
 
         if administrators and sendmail and isfile(self.fileconf):
-            text = """</br>
-                   <b>{name}</b> ask you to grant access to the Web Tool.</br>
-                   If you want to enable <b>{name}</b> aka <b>{mail}</b> click on the following link:</br>
-                   <a href='http://{url}/lib/py/users/enable.py?token={__token__}&enabled=1'>Enable {name}</a></br>
-                   """
+            text = ""  #some headers
             text+= "%s"%(extra)
-            system_mail(administrators, sformat(text, env), sformat("""User confirmation of {name}""", env), self.fileconf)
+            system_mail(administrators, sformat(text, env), sformat("""Check user request of {name}""", env), self.fileconf)
 
         return __token__
 
@@ -123,7 +119,7 @@ class UsersDB(SqliteDB):
                     """
 
             if sendmail and os.path.isfile(self.fileconf):
-                system_mail(mail, sformat(text, user), "User Credentials for the Webgis.", self.fileconf,verbose=verbose)
+                system_mail(mail, sformat(text, user), "Credentials for the Web-Tool.", self.fileconf,verbose=verbose)
             return user
 
         return False
