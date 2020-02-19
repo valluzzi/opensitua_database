@@ -57,6 +57,18 @@ class UsersDB(SqliteDB):
         );"""
         self.execute(sql)
 
+    def sendMail(self, to, Object, text, env=None, verbose=False):
+        if to and os.path.isfile(self.fileconf):
+            env = env if env else {}
+            system_mail(to, sformat(text,env), sformat(Object,env), self.fileconf, verbose=verbose)
+
+    def sendMailToAdmin(self, Object, text ,  env=None, verbose=False):
+
+        administrators = self.execute("""SELECT GROUP_CONCAT([mail],',') FROM [users] WHERE [role] ='admin';""", None,outputmode="scalar", verbose=verbose)
+        if administrators and  os.path.isfile(self.fileconf):
+            env = env if env else {}
+            system_mail(administrators, sformat(text,env), sformat(Object,env), self.fileconf, verbose=verbose)
+
     def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, url="localhost", extra="", verbose=False):
         """
         addUser

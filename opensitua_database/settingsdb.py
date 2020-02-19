@@ -65,4 +65,12 @@ class SettingsDB(SqliteDB):
         get - get a key, value
         """
         (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE [key] LIKE '{key}' AND [groupname]='{groupname}' LIMIT 1;""",{"key":key,"groupname":groupname},outputmode="first-row")
-        return value
+        type = lower(type)
+        if type == "string":
+            return "%s"%value
+        elif type=="number":
+            return float(value)
+        elif type=="list":
+            return value.split(",")
+        else:
+            return value
