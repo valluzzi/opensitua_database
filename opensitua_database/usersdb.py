@@ -165,7 +165,7 @@ class UsersDB(SqliteDB):
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
 
-    def changePassword(self, mail, sendMail=False, sreviceName="localhost"):
+    def changePassword(self, mail, sendMail=False, serviceName="localhost"):
         """
         changePassword
         """
@@ -181,7 +181,7 @@ class UsersDB(SqliteDB):
         """
         __password__ = self.execute(sql, env, outputmode="scalar", verbose=verbose)
         if sendmail and os.path.isfile(self.fileconf):
-            
+
             Subject = """Password change for {service}"""
 
             text = """
