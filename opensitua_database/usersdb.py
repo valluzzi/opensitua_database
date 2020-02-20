@@ -189,6 +189,6 @@ class UsersDB(SqliteDB):
             Your password has been changed:
             password:<b>{password}</b>
             """
-            system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf, verbose=verbose)
+            system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf)
 
         return __password__
