@@ -60,8 +60,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="181" column="65" selection-start-line="181" selection-start-column="65" selection-end-line="181" selection-end-column="65" />
+            <state relative-caret-position="310">
+              <caret line="175" column="30" selection-start-line="175" selection-start-column="30" selection-end-line="175" selection-end-column="30" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -103,7 +103,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-545" />
     <option name="y" value="-1088" />
     <option name="width" value="2576" />
@@ -247,8 +247,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="181" column="65" selection-start-line="181" selection-start-column="65" selection-end-line="181" selection-end-column="65" />
+        <state relative-caret-position="310">
+          <caret line="175" column="30" selection-start-line="175" selection-start-column="30" selection-end-line="175" selection-end-column="30" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>

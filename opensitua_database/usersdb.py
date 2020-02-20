@@ -165,7 +165,7 @@ class UsersDB(SqliteDB):
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
 
-    def changePassword(self, mail, sendMail=False, serviceName="localhost"):
+    def changePassword(self, mail, sendmail=False, service="localhost"):
         """
         changePassword
         """
@@ -173,7 +173,7 @@ class UsersDB(SqliteDB):
         env = {
             "mail": mail,
             "password": password,
-            "service": serviceName
+            "service": service
         }
         sql = """
               UPDATE [users] SET [password]='{password}' WHERE [mail] LIKE '{mail}';
