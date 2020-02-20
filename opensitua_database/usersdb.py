@@ -184,8 +184,8 @@ class UsersDB(SqliteDB):
             Subject = """Password change for {service}"""
 
             text = """
-            {service}
-            Your password has been changed:
+            {service}<br>
+            Your password has been changed:<br>
             password:<b>{password}</b>
             """
             system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf)
