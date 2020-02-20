@@ -176,10 +176,9 @@ class UsersDB(SqliteDB):
             "service": service
         }
         sql = """
-              UPDATE [users] SET [password]='{password}' WHERE [mail] LIKE '{mail}';
-              SELECT [password] FROM [users] WHERE [mail] LIKE '{mail}';
+              UPDATE [users] SET [token]=md5([mail]||'{password}')  WHERE [mail] LIKE '{mail}';
         """
-        __password__ = self.execute(sql, env, outputmode="scalar")
+        self.execute(sql, env, outputmode="scalar")
         if sendmail and os.path.isfile(self.fileconf):
 
             Subject = """Password change for {service}"""
@@ -191,4 +190,4 @@ class UsersDB(SqliteDB):
             """
             system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf)
 
-        return __password__
+        return password
