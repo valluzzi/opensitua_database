@@ -179,7 +179,7 @@ class UsersDB(SqliteDB):
               UPDATE [users] SET [password]='{password}' WHERE [mail] LIKE '{mail}';
               SELECT [password] FROM [users] WHERE [mail] LIKE '{mail}';
         """
-        __password__ = self.execute(sql, env, outputmode="scalar", verbose=verbose)
+        __password__ = self.execute(sql, env, outputmode="scalar")
         if sendmail and os.path.isfile(self.fileconf):
 
             Subject = """Password change for {service}"""
