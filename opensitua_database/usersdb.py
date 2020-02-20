@@ -109,6 +109,8 @@ class UsersDB(SqliteDB):
             "enabled":1 if enabled else 0,
             "password":  sqlite_md5("%s"%randint(0,10000))[:5]
         }
+        #Abilita l'utente e gli cambia il token
+
         sql = """
         UPDATE [users] SET [enabled]={enabled},[token]=md5([mail]||'{password}') WHERE [token]='{token}';
         SELECT [mail],[name],[enabled] FROM [users]  WHERE [token]=md5([mail]||'{password}');
@@ -185,7 +187,7 @@ class UsersDB(SqliteDB):
 
             text = """
             {service}<br>
-            Your password has been changed:<br>
+            Your password was been changed:<br>
             password:<b>{password}</b>
             """
             system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf)

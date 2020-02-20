@@ -60,6 +60,13 @@ class SettingsDB(SqliteDB):
         sql ="""INSERT OR REPLACE INTO [settings]([key],[value],[type],[groupname]) VALUES(?,?,?,?);"""
         self.executeMany(sql,{},[(key,value,type,groupname)])
 
+    def unset(self, key, groupname='General'):
+        """
+        unset - remove key,value tuple
+        """
+        sql = """DELETE FROM [settings] WHERE [key]=? AND [groupname]=?;"""
+        self.executeMany(sql, {}, [(key, groupname)])
+
     def get(self, key, groupname='General'):
         """
         get - get a key, value
