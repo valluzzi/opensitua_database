@@ -164,3 +164,31 @@ class UsersDB(SqliteDB):
         SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' FROM [users] WHERE [mail] LIKE '{__username__}' LIMIT 1;
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
+
+    def changePassword(self, mail, sendMail=False, sreviceName="localhost"):
+        """
+        changePassword
+        """
+        password = sqlite_md5("%s" % (randint(0, 100000)))[:5]
+        env = {
+            "mail": mail,
+            "password": password,
+            "service": serviceName
+        }
+        sql = """
+              UPDATE [users] SET [password]='{password}' WHERE [mail] LIKE '{mail}';
+              SELECT [password] FROM [users] WHERE [mail] LIKE '{mail}';
+        """
+        __password__ = self.execute(sql, env, outputmode="scalar", verbose=verbose)
+        if sendmail and os.path.isfile(self.fileconf):
+            
+            Subject = """Password change for {service}"""
+
+            text = """
+            {service}
+            Your password has been changed:
+            password:<b>{password}</b>
+            """
+            system_mail(mail, sformat(text, env), sformat(Subject, env), self.fileconf, verbose=verbose)
+
+        return __password__
