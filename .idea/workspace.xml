@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensitua_database/settingsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/settingsdb.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -47,11 +45,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4380">
-              <caret line="222" column="41" selection-start-line="222" selection-start-column="32" selection-end-line="222" selection-end-column="41" />
+            <state relative-caret-position="29">
+              <caret line="221" lean-forward="true" selection-start-line="221" selection-end-line="221" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
               </folding>
@@ -71,10 +69,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="531">
+            <state relative-caret-position="163">
               <caret line="67" column="40" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
               <folding>
                 <element signature="e#928#944#0" expanded="true" />
@@ -111,10 +109,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-44" />
-    <option name="y" value="-901" />
-    <option name="width" value="1382" />
-    <option name="height" value="784" />
+    <option name="x" value="-545" />
+    <option name="y" value="-1088" />
+    <option name="width" value="2576" />
+    <option name="height" value="1096" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -180,11 +178,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-545" y="-1088" width="2576" height="1096" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4857793" visible="true" weight="0.1108903" />
-      <window_info id="Structure" order="1" sideWeight="0.5142207" side_tool="true" visible="true" weight="0.1108903" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.48417133" visible="true" weight="0.21104388" />
+      <window_info id="Structure" order="1" sideWeight="0.51582867" side_tool="true" visible="true" weight="0.21104388" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -195,7 +193,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" visible="true" weight="0.08722741" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" visible="true" weight="0.1352657" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -232,16 +230,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4380">
-          <caret line="222" column="41" selection-start-line="222" selection-start-column="32" selection-end-line="222" selection-end-column="41" />
-          <folding>
-            <element signature="e#928#944#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/usersdb.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-620">
@@ -254,8 +242,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/opensitua_database/settingsdb.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
+        <state relative-caret-position="163">
           <caret line="67" column="40" selection-start-line="67" selection-start-column="40" selection-end-line="67" selection-end-column="40" />
+          <folding>
+            <element signature="e#928#944#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/opensitua_database/sqlitedb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="29">
+          <caret line="221" lean-forward="true" selection-start-line="221" selection-end-line="221" />
           <folding>
             <element signature="e#928#944#0" expanded="true" />
           </folding>

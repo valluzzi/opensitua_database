@@ -113,9 +113,9 @@ class UsersDB(SqliteDB):
 
         sql = """
         UPDATE [users] SET [enabled]={enabled},[token]=md5([mail]||'{password}') WHERE [token]='{token}';
-        SELECT [mail],[name],[enabled] FROM [users]  WHERE [token]=md5([mail]||'{password}');
+        SELECT [mail],[name],[enabled],md5([mail]||'{password}' as [token] FROM [users]  WHERE [token]=md5([mail]||'{password}');
         """
-        (mail,name,enabled) = self.execute(sql, env, outputmode='first-row', verbose=verbose)
+        (mail,name,enabled,token) = self.execute(sql, env, outputmode='first-row', verbose=verbose)
 
         # A mail to the user
         if mail:
