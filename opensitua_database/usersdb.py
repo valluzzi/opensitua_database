@@ -124,6 +124,7 @@ class UsersDB(SqliteDB):
                 "mail":mail,
                 "enabled":enabled,
                 "password":env["password"],
+                "token":token,
                 "url":url
             }
             #Login at <a href='http://{url}/webgis/private/{mail}'>http://localhost/webgis/</a></br>
