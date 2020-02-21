@@ -100,6 +100,15 @@ class UsersDB(SqliteDB):
 
         return __token__
 
+    def existsUser(self, name, mail=""):
+        """
+        name
+        """
+        sql ="""SELECT COUNT(*) FROM [users] WHERE [name] LIKE '{name}' OR [mail] LIKE '{mail}';"""
+        count = self.execute(sql, {"name":name,"mail":mail}, outputmode="scalar")
+        return count>0
+        
+
     def enableUser(self, token, enabled=1, sendmail=False, url="localhost", verbose=False):
         """
         enableUser
