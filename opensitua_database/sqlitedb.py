@@ -275,7 +275,7 @@ class SqliteDB:
                     selection={}
                     for row in cursor:
                         for j in range(len(row)):
-                            if columns[j] in selection:
+                            if not columns[j] in selection:
                                 selection[columns[j]] = []
                             selection[columns[j]].append(row[j])
 
