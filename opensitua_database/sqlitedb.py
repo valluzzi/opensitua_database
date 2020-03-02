@@ -251,7 +251,7 @@ class SqliteDB:
                     for j in range(n):
                         rows[j].append(row[j])
 
-            elif outputmode == "response":
+            elif outputmode in ("response","row-response"):
                 metadata = []
                 res = {}
                 if cursor.description:
@@ -264,6 +264,22 @@ class SqliteDB:
                         rows.append(line)
 
                     res = {"status": "success", "success": True, "data": rows, "metadata": metadata, "exception": None}
+                return res
+
+            elif outputmode == "column-response":
+                metadata = []
+                res = {}
+                if cursor.description:
+                    metadata = cursor.description
+                    columns = [item[0] for item in cursor.description]
+                    selection={}
+                    for row in cursor:
+                        for j in range(len(row)):
+                            if columns[j] in selection:
+                                selection[columns[j]] = []
+                            selection[columns[j]].append(row[j])
+
+                    res = {"status": "success", "success": True, "data": selection, "metadata": metadata, "exception": None}
                 return res
 
         return rows
