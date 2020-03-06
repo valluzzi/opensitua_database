@@ -288,7 +288,6 @@ class SqliteDB:
     def executeMany(self, sql, env={}, values=[], commit=True, verbose=False):
         """
         Make a query statetment
-        Returns a cursor
         """
         cursor = self.__get_cursor__()
         line = sformat(sql, env)
@@ -305,6 +304,24 @@ class SqliteDB:
         except Exception as ex:
             line = line.replace("\n", " ")
             print( "No!:SQL Exception:%s :(%s)"%(line,ex))
+
+    def insertMany(self, tablename, mode ="IGNORE", values=[], fieldnames = "",commit=True, verbose=False):
+        """
+        Make an insert statetment
+        """
+        cursor = self.__get_cursor__()
+        fieldnames = wrap(listify(fieldnames), "[", "]")
+        if len(values):
+            n = len(fieldnames) if len(fieldnames) else len(values)
+
+            env ={
+                mode        :   mode,
+                tablename   : tablename,
+                fieldnames  : ",".join( filednames ),
+                question_marks : ",".join( ["?"]*n )
+            }
+            sql = """INSERT OR {mode} INTO [{tablename}]({fieldnames}) VALUES ({});"""
+            self.executeMany(sql, env, values, commit, verbose)
 
     def list(self, verbose=False):
         """
