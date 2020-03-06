@@ -317,10 +317,10 @@ class SqliteDB:
             n = len(fieldnames) if len(fieldnames) else len(values)
 
             env ={
-                mode        :   mode,
-                tablename   : tablename,
-                fieldnames  : ",".join( fieldnames ),
-                question_marks : ",".join( ["?"]*n )
+                "mode"        :   mode,
+                "tablename"   : tablename,
+                "fieldnames"  : ",".join( fieldnames ),
+                "question_marks" : ",".join( ["?"]*n )
             }
             sql = """INSERT OR {mode} INTO [{tablename}]({fieldnames}) VALUES ({question_marks});"""
             print(sformat(sql,env))
