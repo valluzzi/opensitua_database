@@ -305,7 +305,7 @@ class SqliteDB:
             line = line.replace("\n", " ")
             print( "No!:SQL Exception:%s :(%s)"%(line,ex))
 
-    def insertMany(self, tablename, mode ="IGNORE", values=[], fieldnames = "",commit=True, verbose=False):
+    def insertMany(self, tablename, values=[], mode ="IGNORE", fieldnames = "",commit=True, verbose=False):
         """
         Make an insert statetment
         """
