@@ -311,6 +311,8 @@ class SqliteDB:
         """
         cursor = self.__get_cursor__()
         fieldnames = wrap(listify(fieldnames), "[", "]")
+        print(fieldnames)
+        print("---")
         if len(values):
             n = len(fieldnames) if len(fieldnames) else len(values)
 
