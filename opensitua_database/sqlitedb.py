@@ -311,8 +311,6 @@ class SqliteDB:
         """
         cursor = self.__get_cursor__()
         fieldnames = wrap(listify(fieldnames), "[", "]")
-        print(fieldnames)
-        print("---")
         if len(values):
             n = len(fieldnames) if len(fieldnames) else len(values)
 
@@ -323,7 +321,6 @@ class SqliteDB:
                 "question_marks" : ",".join( ["?"]*n )
             }
             sql = """INSERT OR {mode} INTO [{tablename}]({fieldnames}) VALUES ({question_marks});"""
-            print(sformat(sql,env))
             self.executeMany(sql, env, values, commit, verbose)
 
     def list(self, verbose=False):
