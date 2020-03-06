@@ -320,7 +320,7 @@ class SqliteDB:
                 fieldnames  : ",".join( filednames ),
                 question_marks : ",".join( ["?"]*n )
             }
-            sql = """INSERT OR {mode} INTO [{tablename}]({fieldnames}) VALUES ({});"""
+            sql = """INSERT OR {mode} INTO [{tablename}]({fieldnames}) VALUES ({question_marks});"""
             self.executeMany(sql, env, values, commit, verbose)
 
     def list(self, verbose=False):
