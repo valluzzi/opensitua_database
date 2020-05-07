@@ -109,7 +109,7 @@ class UsersDB(SqliteDB):
         return count>0
 
 
-    def enableUser(self, token, enabled=1, sendmail=False, url="localhost", verbose=False):
+    def enableUser(self, token, enabled=1, sendmail=False, url="localhost", subject="", verbose=False):
         """
         enableUser
         """
@@ -143,7 +143,8 @@ class UsersDB(SqliteDB):
                     """
 
             if sendmail and os.path.isfile(self.fileconf):
-                system_mail(mail, sformat(text, user), "Credentials for the Web-Tool.", self.fileconf,verbose=verbose)
+                subject = subject if subject else "Credentials for the Web-Tool."
+                system_mail(mail, sformat(text, user), subject, self.fileconf,verbose=verbose)
             return user
 
         return False
