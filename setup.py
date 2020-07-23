@@ -9,7 +9,7 @@ EMAIL           = "valluzzi@gmail.com"
 GITHUB          = "https://github.com/valluzzi/%s.git"%(PACKAGE_NAME)
 DESCRIPTION     = "A core functions package"
 
-VERSION         =  '0.0.71
+VERSION         =  '0.0.71'
 
 setuptools.setup(
     name=PACKAGE_NAME,
