@@ -31,5 +31,6 @@ def get_version():
 
 
 from .sqlitedb import *
+from .postgresdb import *
 from .usersdb import *
 from .settingsdb import *

@@ -2,25 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/opensitua_database/postgresdb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>verbose=Tru</find>
-      <find>insertMany</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GithubDefaultAccount">
-    <option name="defaultAccountId" value="931666d7-3ae8-4a0a-9374-a97a0363c160" />
   </component>
   <component name="ProjectId" id="1aJM26UcPlFv6Li7hMwok4bt6Kw" />
   <component name="ProjectLevelVcsManager">
@@ -28,14 +22,13 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/opensitua_database" />
-    <property name="settings.editor.selected.configurable" value="ics" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -54,5 +47,15 @@
       <updated>1568208523596</updated>
     </task>
     <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="587" y="-872" key="CommitChangelistDialog2" timestamp="1594028793472">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="587" y="-872" key="CommitChangelistDialog2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1594028793472" />
+    <state x="461" y="-895" key="SettingsEditor" timestamp="1595482909377">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="461" y="-895" key="SettingsEditor/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595482909377" />
   </component>
 </project>
