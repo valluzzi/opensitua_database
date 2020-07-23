@@ -22,12 +22,10 @@
 #
 # Created:    08/07/2019
 #-------------------------------------------------------------------------------
-
-
-__version__ = '0.0.69'
+import pkg_resources
 
 def get_version():
-    return __version__
+    return pkg_resources.get_distribution(PACKAGE_NAME)
 
 
 from .sqlitedb import *

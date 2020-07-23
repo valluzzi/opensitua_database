@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/opensitua_database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +59,14 @@
       <option name="project" value="LOCAL" />
       <updated>1595484287503</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="+ Postgres basic support">
+      <created>1595484603798</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1595484603798</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -65,17 +74,17 @@
     <option name="LAST_COMMIT_MESSAGE" value="+ Postgres basic support" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="587" y="-872" key="CommitChangelistDialog2" timestamp="1595484286616">
+    <state x="587" y="-872" key="CommitChangelistDialog2" timestamp="1595484602942">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="587" y="-872" key="CommitChangelistDialog2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595484286616" />
+    <state x="587" y="-872" key="CommitChangelistDialog2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595484602942" />
     <state x="461" y="-895" key="SettingsEditor" timestamp="1595482909377">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="461" y="-895" key="SettingsEditor/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595482909377" />
-    <state x="552" y="-807" key="Vcs.Push.Dialog.v2" timestamp="1595484290752">
+    <state x="552" y="-807" key="Vcs.Push.Dialog.v2" timestamp="1595484609254">
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
-    <state x="552" y="-807" key="Vcs.Push.Dialog.v2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595484290752" />
+    <state x="552" y="-807" key="Vcs.Push.Dialog.v2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595484609254" />
   </component>
 </project>

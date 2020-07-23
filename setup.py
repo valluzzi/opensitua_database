@@ -1,25 +1,19 @@
 import os,re
 import setuptools
 
+
+
 PACKAGE_NAME    = "opensitua_database"
 AUTHOR          = "Valerio Luzzi"
 EMAIL           = "valluzzi@gmail.com"
 GITHUB          = "https://github.com/valluzzi/%s.git"%(PACKAGE_NAME)
 DESCRIPTION     = "A core functions package"
 
-def get_version():
-    VERSIONFILE = os.path.join(PACKAGE_NAME, '__init__.py')
-    initfile_lines = open(VERSIONFILE, 'rt').readlines()
-    VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]\s*"
-    for line in initfile_lines:
-        mo = re.search(VSRE, line, re.M)
-        if mo:
-            return mo.group(1)
-    raise RuntimeError('Unable to find version string in %s.' % (VERSIONFILE,))
+VERSION         =  '0.0.70'
 
 setuptools.setup(
     name=PACKAGE_NAME,
-    version=get_version(),
+    version=VERSION,
     author=AUTHOR,
     author_email=EMAIL,
     description=DESCRIPTION,
