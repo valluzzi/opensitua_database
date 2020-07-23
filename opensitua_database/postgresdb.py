@@ -31,11 +31,11 @@ class PostgresDB:
     """
     PostgresDB - a class with common base methods
     """
-    def __init__(self, dsn="", modules="", verbose=False):
+    def __init__(self, dsn="", env={}, verbose=False):
         """
         Constructor
         """
-        self.dsn = dsn
+        self.dsn = sformat(dsn,env)
         self.conn = None
         self.__connect__()
 
