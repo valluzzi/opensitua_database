@@ -1,13 +1,13 @@
 import os,re
 import setuptools
 
-VERSION         =  "0.0.74"
+VERSION         =  "0.0.75"
 
 PACKAGE_NAME    = "opensitua_database"
 AUTHOR          = "Valerio Luzzi"
 EMAIL           = "valluzzi@gmail.com"
 GITHUB          = "https://github.com/valluzzi/%s.git"%(PACKAGE_NAME)
-DESCRIPTION     = "A core functions package"
+DESCRIPTION     = "A core database functions package"
 
 
 setuptools.setup(

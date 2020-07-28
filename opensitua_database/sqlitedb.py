@@ -25,9 +25,10 @@
 import os,sys,re
 import time
 import sqlite3 as sqlite
+from .abstractdb import *
 from opensitua_core import *
 
-class SqliteDB:
+class SqliteDB(AbstractBD):
     """
     SqliteDB - a class with common base methods
     """
