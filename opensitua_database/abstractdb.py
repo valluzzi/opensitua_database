@@ -27,6 +27,19 @@ import time
 import psycopg2
 from opensitua_core import *
 
+SQL_INJECTION_WORDS = (
+
+    "CREATE ",
+    "INSERT ",
+    "UPDATE ",
+    "REPLACE ",
+    "SELECT "
+    "DROP ",
+    "DELETE ",
+
+)
+
+
 class AbstractDB:
     """
     AbstractDB - a class with common base methods
@@ -62,6 +75,36 @@ class AbstractDB:
     def __connect__(self):
         pass
 
+    def __contains__(self, text, items, case_sensitive=True):
+        """
+        __contains__
+        """
+        for item in items:
+            if case_sensitive and "%s"%item in text:
+                return True
+            elif not case_sensitive and ("%s"%item).upper() in text.upper():
+                return True
+        return False
+
+    def __sql_injection__(self, text):
+        """
+        avoid sql injection
+        """
+        if self.__contains__(text, SQL_INJECTION_WORDS, False):
+            print("Warning:SQL INJECTION DETECTED!:<%s>"%text)
+            return ""
+        #if text.strip('\t\n\r ').startswith("'")
+
+        return text
+
+    def __check_args__(self, env):
+        """
+        check for sql injection
+        """
+        for key in env:
+            env[key] = self.__sql_injection__(env[key])
+        return env
+
     def __prepare_query__(self, sql, env={}, verbose=False):
         """
         prepare the query
@@ -88,7 +131,8 @@ class AbstractDB:
         #remove spaces between stetements
         sql = re.sub(r';\s+',';',sql)
 
-        #env = self.__check_args__(env)
+        #check for sql injection
+        env = self.__check_args__(env)
 
         return sql, env
 

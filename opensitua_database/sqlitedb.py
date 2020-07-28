@@ -28,7 +28,7 @@ import sqlite3 as sqlite
 from .abstractdb import *
 from opensitua_core import *
 
-class SqliteDB(AbstractBD):
+class SqliteDB(AbstractDB):
     """
     SqliteDB - a class with common base methods
     """
