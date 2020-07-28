@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="" />
+    <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/opensitua_database/abstractdb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/opensitua_database/http_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/postgresdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/postgresdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/sqlitedb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,5 +104,9 @@
       <screen x="0" y="-1080" width="1920" height="1080" />
     </state>
     <state x="552" y="-807" key="Vcs.Push.Dialog.v2/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595488219167" />
+    <state x="623" y="-845" width="672" height="678" key="search.everywhere.popup" timestamp="1595575756747">
+      <screen x="0" y="-1080" width="1920" height="1080" />
+    </state>
+    <state x="623" y="-845" width="672" height="678" key="search.everywhere.popup/0.0.1366.738/0.-1080.1920.1080@0.-1080.1920.1080" timestamp="1595575756747" />
   </component>
 </project>
