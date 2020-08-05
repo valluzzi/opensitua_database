@@ -90,7 +90,7 @@ class AbstractDB:
         """
         avoid sql injection
         """
-        if self.__contains__(text, SQL_INJECTION_WORDS, False):
+        if isinstance(text,str) and self.__contains__(text, SQL_INJECTION_WORDS, False):
             print("Warning:SQL INJECTION DETECTED!:<%s>"%text)
             return ""
         #if text.strip('\t\n\r ').startswith("'")
