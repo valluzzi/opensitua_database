@@ -41,7 +41,7 @@ def JSONResponse(obj, start_response=None):
     """
     JSONResponse
     """
-    if isinstance(str):
+    if isinstance(obj, str):
         text = obj
     elif isinstance(obj, (dict, list)):
         text = json.dumps(obj)
