@@ -26,7 +26,7 @@ import os,sys,re
 from random import randint
 from .sqlitedb import *
 from .sqlite_utils import *
-from opensitua_core import system_mail,sformat
+from opensitua_core import system_mail
 
 
 class UsersDB(SqliteDB):
@@ -41,8 +41,7 @@ class UsersDB(SqliteDB):
         self.create_function("md5", 1, sqlite_md5 )
         self.__create_structure__(verbose)
         self.fileconf = fileconf
-        self.filekey = filekey
-
+        self.filekey  = filekey
 
     def __create_structure__(self, verbose=False):
         """
@@ -59,21 +58,21 @@ class UsersDB(SqliteDB):
         self.execute(sql)
 
     def getAdmins(self, verbose=False):
-        return self.execute("""SELECT [mail] FROM [users] WHERE [role] ='admin';""", None, outputmode="array", verbose=verbose)
+        administrators = self.execute("""SELECT [mail] FROM [users] WHERE [role] ='admin';""", None, outputmode="array", verbose=verbose)
+        administrators = [ item for (item,) in administrators]
+        return administrators
 
     def sendMail(self, To, Object, text, env=None, verbose=False):
-        if To and os.path.isfile(self.fileconf):
-            system_mail(To, text, Object, "", self.fileconf, self.filekey, env)
+        system_mail(To, text, Object, "", self.fileconf, self.filekey, env)
 
     def sendMailToAdmin(self, Object, text , env=None, verbose=False):
         administrators = self.getAdmins()
-        if administrators and  os.path.isfile(self.fileconf):
-            system_mail(administrators, text, Object, "", self.fileconf, self.filekey, env)
+        system_mail(administrators, text, Object, "", self.fileconf, self.filekey, env)
 
-    def sendMailAndCCToAdmin(self, To, Object, text , env=None, verbose=False):
-        if To and os.path.isfile(self.fileconf):
-            administrators = self.getAdmins()
-            system_mail(to, text, Object, administrators, self.fileconf, self.filekey, env)
+    def sendMailAndFeedBackAdmin(self, To, ObjectForUser, ObjectForAdmin="", text="", env=None, verbose=False):
+        ObjectForAdmin = ObjectForAdmin if ObjectForAdmin else ObjectForUser
+        system_mail(To, text, ObjectForUser, "", self.fileconf, self.filekey, env)
+        system_mail(self.getAdmins(), text, ObjectForAdmin, To, self.fileconf, self.filekey, env)
 
     def addUser(self, mail, name="", password="", role="user", enabled=False, sendmail=False, url="localhost", extra="", verbose=False):
         """
@@ -94,15 +93,6 @@ class UsersDB(SqliteDB):
         """
         __token__ = self.execute(sql, env, outputmode="scalar", verbose=verbose)
         env["__token__"] = __token__
-
-        #send a mail to Administrators
-        administrators = self.execute("""SELECT GROUP_CONCAT([mail],',') FROM [users] WHERE [role] ='admin';""", env,
-                               outputmode="scalar", verbose=verbose)
-
-        #if administrators and sendmail and isfile(self.fileconf):
-        #    text = ""  #some headers
-        #    text+= "%s"%(extra)
-        #    system_mail(administrators, text, """Check user request of {name}""", self.fileconf, self.filekey, env)
 
         if sendmail:
             text = ""  # some headers
@@ -149,7 +139,7 @@ class UsersDB(SqliteDB):
             }
             #Login at <a href='http://{url}/webgis/private/{mail}'>http://localhost/webgis/</a></br>
             text = """</br>
-                    Hello {name}!
+                    Hello {name}!</br>
                     Login at <a href='{url}'>{url}</a></br>
                     Your password is:<b>{password}</b></br>
                     """
@@ -157,7 +147,9 @@ class UsersDB(SqliteDB):
             #if sendmail and os.path.isfile(self.fileconf):
             #    subject = subject if subject else "Credentials for the Web-Tool."
             #    system_mail(mail, text, subject, self.fileconf, self.filekey, user, verbose=verbose)
-            self.sendMailAndCCToAdmin(mail, text, subject, self.fileconf, self.filekey, user, verbose=verbose)
+            ObjectForUser = subject if subject else "Credentials for the Web-Tool."
+            ObjectForAdmin = "New User {name} has been enabled!"
+            self.sendMailAndFeedBackAdmin(mail, ObjectForUser,ObjectForAdmin, text, user, verbose=verbose)
             return user
 
         return False
@@ -202,18 +194,23 @@ class UsersDB(SqliteDB):
             "service": service
         }
         sql = """
-              UPDATE [users] SET [token]=md5([mail]||'{password}')  WHERE [mail] LIKE '{mail}';
+              UPDATE [users] SET [token]=md5([mail]||'{password}') WHERE [mail] LIKE '{mail}';
+              SELECT [name] FROM [users] WHERE [mail] LIKE '{mail}';
         """
-        self.execute(sql, env, outputmode="scalar")
+        env["name"] = self.execute(sql, env, outputmode="scalar")
+
         if sendmail and os.path.isfile(self.fileconf):
 
-            Subject = """Password change for {service}"""
+            Subject = """Password change for {name} in {service}"""
 
             text = """
-            {service}<br>
+            <b>{name}</b> ({mail})<br>
             Your password has been changed:<br>
             password:<b>{password}</b>
             """
-            system_mail(mail, text, Subject, self.fileconf, self.filekey, env)
+            #system_mail(mail, text, Subject, self.fileconf, self.filekey, env)
+            ObjectForUser = Subject
+            ObjectForAdmin = "User {name} changed the password"
+            self.sendMailAndFeedBackAdmin(mail, ObjectForUser, ObjectForAdmin, text, env)
 
         return password
