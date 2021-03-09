@@ -105,7 +105,7 @@ class UsersDB(SqliteDB):
         """
         name
         """
-        sql ="""SELECT COUNT(*) FROM [users] WHERE [name] LIKE '{name}' OR [mail] LIKE '{mail}';"""
+        sql ="""SELECT COUNT(*) FROM [users] WHERE [mail] = '{mail}';"""
         count = self.execute(sql, {"name":name,"mail":mail}, outputmode="scalar")
         return count>0
 
@@ -164,7 +164,7 @@ class UsersDB(SqliteDB):
         }
         sql = """
         SELECT md5([token]||strftime('%Y-%m-%d','now')) FROM [users]
-            WHERE ([name] LIKE '{username}' OR [mail] LIKE '{username}')
+            WHERE [mail] = '{username}'
             AND [token] LIKE md5([mail]||'{password}')
             AND [enabled];
         """
@@ -179,7 +179,7 @@ class UsersDB(SqliteDB):
             "__token__": token
         }
         sql = """
-        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' FROM [users] WHERE [mail] LIKE '{__username__}' LIMIT 1;
+        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' FROM [users] WHERE [mail] = '{__username__}' LIMIT 1;
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
 
@@ -194,8 +194,8 @@ class UsersDB(SqliteDB):
             "service": service
         }
         sql = """
-              UPDATE [users] SET [token]=md5([mail]||'{password}') WHERE [mail] LIKE '{mail}';
-              SELECT [name] FROM [users] WHERE [mail] LIKE '{mail}';
+              UPDATE [users] SET [token]=md5([mail]||'{password}') WHERE [mail] = '{mail}';
+              SELECT [name] FROM [users] WHERE [mail] = '{mail}';
         """
         env["name"] = self.execute(sql, env, outputmode="scalar")
 
