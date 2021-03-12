@@ -175,8 +175,8 @@ class AbstractDB:
                     command = command.replace("\n", " ")
                     print( "No!:SQL Exception:%s :(%s)"%(command,ex))
 
-                    if outputmode == "response":
-                        res = {"status": "fail", "success": False, "exception": ex, "sql": command}
+                    if outputmode in ("response","row-response"):
+                        res = {"status": "fail", "success": False, "exception": "%s"%ex, "sql": command}
                         return res
 
             if outputmode == "cursor":
