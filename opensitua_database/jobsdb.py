@@ -69,11 +69,11 @@ class JobsDB(SqliteDB):
         """
 
         env = {
-            "jid":"0001"
+            "jid":"0001",
             "pid":os.getpid(),
             "type":"generic",
             "user":"unknown",
-            "description","...",
+            "description":"...",
             "command":"",
             "status":"ready",
             "progress":0.0
