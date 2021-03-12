@@ -117,17 +117,17 @@ class JobsDB(SqliteDB):
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
 
-    def ProcessQueue(self, parallelism = -1, max_load = 70):
+    def ProcessQueue(self, parallelism = -1, max_load = 70, verbose = False):
         """
         ProcessQueue - process the job queue
         """
         parallelism = parallelism if parallelism else psutil.cpu_count()
         sql = """SELECT * FROM [jobs] WHERE [status] = 'queued' ORDER BY [inserttime] ASC;"""
-        job_list = self.execute(sql, outputmode="dict", verbose=False)
+        job_list = self.execute(sql, outputmode="dict", verbose=verbose)
         for job in job_list:
             n = self.execute(
                 """SELECT COUNT(*) FROM [jobs] WHERE [status] NOT IN ('ready','queued','done','error');""",
-                outputmode="scalar")
+                outputmode="scalar", verbose=verbose)
             cpu_load = psutil.cpu_percent(interval=1)
             if n < parallelism or cpu_load < max_load:
                 self.ExecuteJob(job["jid"])
