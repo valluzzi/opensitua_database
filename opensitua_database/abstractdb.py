@@ -235,7 +235,7 @@ class AbstractDB:
                             line[columns[j]] = row[j]
                         rows.append(line)
 
-                    res = {"status": "success", "success": True, "data": rows, "metadata": metadata, "exception": None}
+                    res = {"status": "success", "success": True, "data": rows, "metadata": columns, "pos":0, "total_count":len(rows), "exception": None}
                 return res
 
             elif outputmode == "column-response":
