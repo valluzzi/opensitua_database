@@ -58,8 +58,7 @@ class JobsDB(SqliteDB):
               [inserttime] INTEGER DEFAULT (STRFTIME ('%s', 'now', 'localtime')), 
               [starttime] DATETIME, 
               [endtime] DATETIME, 
-              PRIMARY KEY([jid], [user], [case_study])) WITHOUT ROWID;
-        );"""
+              PRIMARY KEY([jid], [user], [case_study])) WITHOUT ROWID;"""
         self.execute(sql)
 
 

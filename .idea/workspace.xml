@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="+ Postgres basic support">
       <change beforePath="$PROJECT_DIR$/opensitua_database/jobsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/jobsdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
