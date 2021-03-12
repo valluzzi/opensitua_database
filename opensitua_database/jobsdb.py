@@ -117,7 +117,7 @@ class JobsDB(SqliteDB):
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
 
-    def ProcessQueue(parallelism = -1, max_load = 70):
+    def ProcessQueue(self, parallelism = -1, max_load = 70):
         """
         ProcessQueue - process the job queue
         """
