@@ -119,7 +119,7 @@ class JobsDB(SqliteDB):
     def ProcessQueue(self, parallelism = -1, max_load = 70, verbose = False):
         """
         ProcessQueue - process the job queue
-        """ProcessQueueForever(verbose=True)
+        """
         parallelism = parallelism if parallelism else psutil.cpu_count()
         sql = """SELECT * FROM [jobs] WHERE [status] = 'queued' ORDER BY [inserttime] ASC;"""
         job_list = self.execute(sql, outputmode="dict", verbose=verbose)
