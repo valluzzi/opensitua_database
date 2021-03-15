@@ -88,7 +88,8 @@ class JobsDB(SqliteDB):
         """
         executeJob
         """
-        params["jid"] = jid
+        params ={"jid" : jid}
+
         sql = """UPDATE [jobs] SET status='running',progress=0 WHERE jid='{jid}';
                      SELECT [command] FROM [jobs] WHERE [jid]='{jid}' and status='running';"""
         command = self.execute(sql, params, outputmode="scalar")
