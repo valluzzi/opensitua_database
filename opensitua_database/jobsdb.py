@@ -101,6 +101,7 @@ class JobsDB(SqliteDB):
                 print("-----------------------------------------")
                 params["pid"] = p.pid
                 params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
+                params["status"] = "running"
                 res = {"success": True, "data": "process started"}
             except Exception as ex:
                 params["pid"] = -1
@@ -117,7 +118,7 @@ class JobsDB(SqliteDB):
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
 
-    def ProcessQueue(self, parallelism = -1, max_load = 70, verbose = False):
+    def ProcessQueue(self, parallelism = -1, max_load = 70, filter = "", verbose = False):
         """
         ProcessQueue - process the job queue
         """
@@ -132,7 +133,7 @@ class JobsDB(SqliteDB):
             if n < parallelism or cpu_load < max_load:
                 self.executeJob(job["jid"])
 
-    def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, verbose=False):
+    def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, filter = "", verbose=False):
         """
         ProcessQueueForever
         """
