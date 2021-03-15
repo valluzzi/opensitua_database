@@ -131,6 +131,11 @@ class JobsDB(SqliteDB):
             if n < parallelism or cpu_load < max_load:
                 self.ExecuteJob(job["jid"])
 
-
-
+    def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, verbose=False):
+        """
+        ProcessQueueForever
+        """
+        while True:
+            self.ProcessQueue(parallelism, max_load)
+            sleep(interval)
 
