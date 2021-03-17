@@ -48,7 +48,7 @@ class JobsDB(SqliteDB):
         CREATE TABLE IF NOT EXISTS [jobs](
               [jid] TEXT, 
               [pid] INT, 
-              [precond_pid] INTEGER,
+              [precond_jid] INTEGER,
               [type] TEXT, 
               [user] TEXT, 
               [description] TEXT, 
@@ -76,11 +76,11 @@ class JobsDB(SqliteDB):
             "command":"",
             "status":"ready",
             "progress":0.0,
-            "precond_pid": 0,
+            "precond_jid": 0,
         }
         env.update(options)
-        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_pid], [type],   [description],  [command],  [status], [progress]) 
-                                      VALUES('{jid}','{user}','{pid}','{precond_pid}','{type}','{description}','{command}','{status}','{progress}')"""
+        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type],   [description],  [command],  [status], [progress]) 
+                                      VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{description}','{command}','{status}','{progress}')"""
         self.execute(sql, env, verbose=verbose)
 
     def executeJob(self,jid):
@@ -122,10 +122,13 @@ class JobsDB(SqliteDB):
         """
         parallelism = parallelism if parallelism else psutil.cpu_count()
         sql = """SELECT a.* FROM [jobs] a 
-                LEFT JOIN [jobs] b ON a.[precond_pid] = b.[pid]
+                LEFT JOIN [jobs] b ON a.[precond_jid] = b.[jid]
                 WHERE a.[status] = 'queued' AND ( b.[status] = 'done' or b.[status] IS NULL)
                 ORDER BY a.[inserttime] ASC;"""
         job_list = self.execute(sql, outputmode="dict", verbose=verbose)
+        print("="*80)
+        print(job_list)
+        print("="*80)
         for job in job_list:
             n = self.execute(
                 """SELECT COUNT(*) FROM [jobs] WHERE [status] NOT IN ('ready','queued','done','error');""",
@@ -139,6 +142,6 @@ class JobsDB(SqliteDB):
         ProcessQueueForever
         """
         while True:
-            self.ProcessQueue(parallelism, max_load)
+            self.ProcessQueue(parallelism, max_load, verbose=verbose)
             sleep(interval)
 
