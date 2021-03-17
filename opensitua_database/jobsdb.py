@@ -46,10 +46,10 @@ class JobsDB(SqliteDB):
         """
         sql = """
         CREATE TABLE IF NOT EXISTS [jobs](
-              [jid] INTEGER, 
+              [jid] TEXT, 
               [pid] INT, 
+              [precond_pid] INTEGER,
               [type] TEXT, 
-              [case_study] TEXT, 
               [user] TEXT, 
               [description] TEXT, 
               [command] TEXT, 
@@ -58,7 +58,7 @@ class JobsDB(SqliteDB):
               [inserttime] INTEGER DEFAULT (STRFTIME ('%s', 'now', 'localtime')), 
               [starttime] DATETIME, 
               [endtime] DATETIME, 
-              PRIMARY KEY([jid], [user], [case_study])) WITHOUT ROWID;"""
+              PRIMARY KEY([jid], [user])) WITHOUT ROWID;"""
         self.execute(sql)
 
 
@@ -68,21 +68,20 @@ class JobsDB(SqliteDB):
         """
 
         env = {
-            "jid":"0001",
+            "jid":"0000",
             "pid":os.getpid(),
             "type":"generic",
             "user":"unknown",
             "description":"...",
             "command":"",
             "status":"ready",
-            "progress":0.0
+            "progress":0.0,
+            "precond_pid": 0,
         }
         env.update(options)
-        sql= """
-        INSERT OR IGNORE INTO [jobs]([jid],[pid],[type],[user],[description],[command],[status],[progress]) 
-                            VALUES( '{jid}','{pid}','{type}','{user}','{description}','{command}','{status}','{progress}');
-        """
-        self.execute(sql, env)
+        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_pid], [type],   [description],  [command],  [status], [progress]) 
+                                      VALUES('{jid}','{user}','{pid}','{precond_pid}','{type}','{description}','{command}','{status}','{progress}')"""
+        self.execute(sql, env, verbose=verbose)
 
     def executeJob(self,jid):
         """
@@ -91,7 +90,7 @@ class JobsDB(SqliteDB):
         params ={"jid" : jid}
 
         sql = """UPDATE [jobs] SET status='running',progress=0 WHERE jid='{jid}';
-                     SELECT [command] FROM [jobs] WHERE [jid]='{jid}' and status='running';"""
+                 SELECT [command] FROM [jobs] WHERE [jid]='{jid}' and status='running';"""
         command = self.execute(sql, params, outputmode="scalar")
 
         if command:
@@ -113,7 +112,6 @@ class JobsDB(SqliteDB):
             params["status"] = "error"
             params["starttime"] = ""
             res = {"success": False, "exception": "unable to find process with jobid={jid}".format(**params)}
-            print(params["status"])
 
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
@@ -123,7 +121,10 @@ class JobsDB(SqliteDB):
         ProcessQueue - process the job queue
         """
         parallelism = parallelism if parallelism else psutil.cpu_count()
-        sql = """SELECT * FROM [jobs] WHERE [status] = 'queued' ORDER BY [inserttime] ASC;"""
+        sql = """SELECT a.* FROM [jobs] a 
+                LEFT JOIN [jobs] b ON a.[precond_pid] = b.[pid]
+                WHERE a.[status] = 'queued' AND ( b.[status] = 'done' or b.[status] IS NULL)
+                ORDER BY a.[inserttime] ASC;"""
         job_list = self.execute(sql, outputmode="dict", verbose=verbose)
         for job in job_list:
             n = self.execute(
