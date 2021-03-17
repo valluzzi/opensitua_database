@@ -126,9 +126,6 @@ class JobsDB(SqliteDB):
                 WHERE a.[status] = 'queued' AND ( b.[status] = 'done' or b.[status] IS NULL)
                 ORDER BY a.[inserttime] ASC;"""
         job_list = self.execute(sql, outputmode="dict", verbose=verbose)
-        print("="*80)
-        print(job_list)
-        print("="*80)
         for job in job_list:
             n = self.execute(
                 """SELECT COUNT(*) FROM [jobs] WHERE [status] NOT IN ('ready','queued','done','error');""",
