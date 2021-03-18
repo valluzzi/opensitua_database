@@ -97,9 +97,6 @@ class JobsDB(SqliteDB):
         if command:
             commandname = command.split(" ",1)[0]
             white_list = listify(white_list)
-            print(command)
-            print(commandname)
-            print(white_list)
             if not commandname.lower() in white_list:
                 command = ""
                 params["pid"] = -1
@@ -107,7 +104,7 @@ class JobsDB(SqliteDB):
                 params["progress"] = 100
                 params["starttime"] = ""
                 params["description"] = "Command not enabled!"
-                print("{description}".format(**params))
+                # print("{description}".format(**params))
             if "&" in command:
                 command = ""
                 params["pid"] = -1
@@ -115,7 +112,7 @@ class JobsDB(SqliteDB):
                 params["progress"] = 100
                 params["starttime"] = ""
                 params["description"] = "Command catenation not allowed!"
-                print("{description}".format(**params))
+                # print("{description}".format(**params))
         # --------------------------------------------------------------------------------------------------------------
         if command:
             try:
