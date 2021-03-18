@@ -80,6 +80,7 @@ class JobsDB(SqliteDB):
             "pid":os.getpid(),
             "type":"generic",
             "user":"unknown",
+            "case_study":"",
             "description":"...",
             "command":"",
             "status":"ready",
