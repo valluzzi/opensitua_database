@@ -148,13 +148,13 @@ class AbstractDB:
         if cursor:
             sql, env = self.__prepare_query__(sql, env, verbose)
 
-            sql = sformat(sql, env)
+            sql = sql.format(**env)
             commands = split(sql, ";", "'\"")
             commands = [command.strip() + ";" for command in commands if len(command) > 0]
 
             for command in commands:
                 t1 = time.time()
-                command = sformat(command, env)
+                command = command.format(**env)
 
                 try:
 
@@ -261,7 +261,7 @@ class AbstractDB:
         Make a query statetment
         """
         cursor = self.__get_cursor__()
-        line = sformat(sql, env)
+        line = sql.format(**env)
         try:
             t1 = time.time()
             cursor.executemany(line, values)

@@ -26,6 +26,7 @@ import os,sys,re
 import subprocess, psutil
 from .sqlitedb import *
 from .sqlite_utils import *
+from opensitua_core import kill_process,strftime
 
 
 class JobsDB(SqliteDB):
@@ -49,7 +50,8 @@ class JobsDB(SqliteDB):
               [jid] TEXT, 
               [pid] INT, 
               [precond_jid] INTEGER,
-              [type] TEXT, 
+              [type] TEXT,
+              [case_study] TEXT, 
               [user] TEXT, 
               [description] TEXT, 
               [command] TEXT, 
@@ -61,8 +63,14 @@ class JobsDB(SqliteDB):
               PRIMARY KEY([jid], [user])) WITHOUT ROWID;"""
         self.execute(sql)
 
+    def get_pid(self, params, verbose=False):
+        """
+        get_pid
+        """
+        pid = db.execute("""SELECT [pid] FROM [jobs] WHERE [jid]='{jid}';""", params, outputmode="scalar", verbose=verbose)
+        return pid if pid else -1
 
-    def addJob(self, options, verbose=False):
+    def add_job(self, params, verbose=False):
         """
         addUser
         """
@@ -78,14 +86,75 @@ class JobsDB(SqliteDB):
             "progress":0.0,
             "precond_jid": 0,
         }
-        env.update(options)
-        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type],   [description],  [command],  [status], [progress]) 
-                                      VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{description}','{command}','{status}','{progress}')"""
+        env.update(params)
+        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type], [case_study],    [description],  [command],  [status], [progress]) 
+                                      VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{case_study}', '{description}','{command}','{status}','{progress}')"""
         self.execute(sql, env, verbose=verbose)
 
-    def executeJob(self, jid, white_list=""):
+    def remove_job(self, params, verbose=False):
         """
-        executeJob
+        remove_job
+        """
+        env = {
+            "jid":"0000"
+        }
+        env.update(params)
+        kill_process(self.get_pid(env))
+        self.execute("""DELETE FROM [jobs] WHERE [jid]='{jid}';""", env, verbose=verbose)
+
+    def remove_all(self, params, verbose=False):
+        """
+        """
+        env = {
+            "__username__": "public"
+        }
+        env.update(params)
+        pids = self.execute(
+            """SELECT [pid] FROM [jobs] WHERE [user]='{__username__}' and status NOT IN ('ready','queued','error');""",
+            env, outputmode="array", verbose=verbose)
+        for (pid,) in pids:
+            kill_process(pid)
+        self.execute("""DELETE FROM [jobs] WHERE [user]='{__username__}';""", env, verbose=verbose)
+
+    def start_job(self, params, verbose=False):
+        """
+        start_job
+        """
+        params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
+        self.execute("UPDATE [jobs] SET status='queued', progress=0, starttime='{starttime}' WHERE jid='{jid}';", params, verbose=verbose)
+
+    def stop_job(self, params, verbose=False):
+        """
+        stop_job
+        """
+        pid = self.get_pid(params)
+        if kill_process(pid):
+            params["status"] = "stopped"
+            params["endtime"] = strftime('%Y-%m-%d %H:%M:%S', None)
+            sql = """UPDATE [jobs] SET status='{status}', progress=100, endtime='{endtime}' WHERE jid='{jid}';"""
+            self.execute(sql, params, verbose=verbose)
+
+    def list(self, params, verbose=False):
+        """
+        list
+        """
+        sql = """SELECT *,
+                    ((julianday( IFNULL(endtime,datetime('now','localtime')) ) - julianday(starttime)) * 86400.0) as [runtime]
+                    FROM [jobs]
+                    WHERE [case_study] = '{case_study}'
+                    AND [user] = '{__username__}'
+                    ORDER BY [inserttime] ASC ;"""
+        res = db.execute(sql, params, outputmode="row-response", verbose = verbose)
+        if "metadata" in res:
+            res["columns"] = [{"id": "%s" % item[0], "header": "%s" % item[0]} for item in res["metadata"]]
+            del res["metadata"]
+        res["pos"] = 0
+        res["total_count"] = len(res["data"])
+        return res
+
+    def execute_job(self, jid, white_list=""):
+        """
+        execute_job
         """
         params ={"jid" : jid}
 
@@ -153,7 +222,7 @@ class JobsDB(SqliteDB):
                 outputmode="scalar", verbose=verbose)
             cpu_load = psutil.cpu_percent(interval=1)
             if n < parallelism or cpu_load < max_load:
-                self.executeJob(job["jid"], white_list)
+                self.execute_job(job["jid"], white_list)
 
     def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, white_list = "", verbose=False):
         """

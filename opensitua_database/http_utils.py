@@ -26,17 +26,6 @@ import os,sys,re
 import json
 from .postgresdb import *
 
-def sformat(text, args):
-    """
-    sformat
-    """
-    for key in args:
-        text = text.replace("{%s}" % key, "%s" % (args[key]))
-
-    text = re.sub(r'\{(.*?)\}',r'',text)
-    return text
-
-
 def JSONResponse(obj, start_response=None):
     """
     JSONResponse
@@ -92,7 +81,7 @@ def SqlScriptResponse( params, start_response ):
                 line = f.readline()
 
             if db and sql:
-                # print(sformat(sql,params))
+                # print(sql.format(**params))
                 res = db.execute(sql, params, outputmode="dict", verbose=verbose)
 
             if db:
