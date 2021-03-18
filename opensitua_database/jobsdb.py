@@ -97,18 +97,25 @@ class JobsDB(SqliteDB):
         if command:
             commandname = command.split(" ",1)[0]
             white_list = listify(white_list)
+            print(command)
+            print(commandname)
+            print(white_list)
             if not commandname.lower() in white_list:
                 command = ""
                 params["pid"] = -1
                 params["status"] = "error"
+                params["progress"] = 100
                 params["starttime"] = ""
-                res = {"success": False, "exception": "Command not enabled!".format(**params)}
+                params["description"] = "Command not enabled!"
+                print("{description}".format(**params))
             if "&" in command:
                 command = ""
                 params["pid"] = -1
                 params["status"] = "error"
+                params["progress"] = 100
                 params["starttime"] = ""
-                res = {"success": False, "exception": "Command catenation not allowed!".format(**params)}
+                params["description"] = "Command catenation not allowed!"
+                print("{description}".format(**params))
         # --------------------------------------------------------------------------------------------------------------
         if command:
             try:
@@ -118,17 +125,15 @@ class JobsDB(SqliteDB):
                 params["pid"] = p.pid
                 params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
                 params["status"] = "running"
-                res = {"success": True, "data": "process started"}
             except Exception as ex:
                 params["pid"] = -1
                 params["status"] = "error"
                 params["starttime"] = ""
-                res = {"success": False, "exception": "unable to start process"}
         else:
             params["pid"] = -1
             params["status"] = "error"
             params["starttime"] = ""
-            res = {"success": False, "exception": "unable to find process with jobid={jid}".format(**params)}
+
 
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
