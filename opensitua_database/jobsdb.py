@@ -98,13 +98,13 @@ class JobsDB(SqliteDB):
             commandname = command.split(" ",1)[0]
             white_list = listify(white_list)
             if not commandname.lower() in white_list:
-                command = None
+                command = ""
                 params["pid"] = -1
                 params["status"] = "error"
                 params["starttime"] = ""
                 res = {"success": False, "exception": "Command not enabled!".format(**params)}
             if "&" in command:
-                command = None
+                command = ""
                 params["pid"] = -1
                 params["status"] = "error"
                 params["starttime"] = ""
