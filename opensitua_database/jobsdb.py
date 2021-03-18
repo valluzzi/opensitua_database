@@ -83,7 +83,7 @@ class JobsDB(SqliteDB):
                                       VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{description}','{command}','{status}','{progress}')"""
         self.execute(sql, env, verbose=verbose)
 
-    def executeJob(self,jid):
+    def executeJob(self, jid, white_list=""):
         """
         executeJob
         """
@@ -93,6 +93,22 @@ class JobsDB(SqliteDB):
                  SELECT [command] FROM [jobs] WHERE [jid]='{jid}' and status='running';"""
         command = self.execute(sql, params, outputmode="scalar")
 
+        # -- Security filter to allow just commands in white_list ------------------------------------------------------
+        if command:
+            commandname = ""+command.split(command," ")[0]
+            if not commandname.lower() in white_list:
+                command = None
+                params["pid"] = -1
+                params["status"] = "error"
+                params["starttime"] = ""
+                res = {"success": False, "exception": "Command not enabled!".format(**params)}
+            if "&" in command:
+                command = None
+                params["pid"] = -1
+                params["status"] = "error"
+                params["starttime"] = ""
+                res = {"success": False, "exception": "Command catenation not allowed!".format(**params)}
+        # --------------------------------------------------------------------------------------------------------------
         if command:
             try:
                 p = subprocess.Popen(command)
@@ -116,7 +132,7 @@ class JobsDB(SqliteDB):
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
 
-    def ProcessQueue(self, parallelism = -1, max_load = 70, filter = "", verbose = False):
+    def ProcessQueue(self, parallelism = -1, max_load = 70, white_list = "", verbose = False):
         """
         ProcessQueue - process the job queue
         """
@@ -127,18 +143,17 @@ class JobsDB(SqliteDB):
                 ORDER BY a.[inserttime] ASC;"""
         job_list = self.execute(sql, outputmode="dict", verbose=verbose)
         for job in job_list:
-            n = self.execute(
-                """SELECT COUNT(*) FROM [jobs] WHERE [status] NOT IN ('ready','queued','done','error');""",
+            n = self.execute("""SELECT COUNT(*) FROM [jobs] WHERE [status] NOT IN ('ready','queued','done','error');""",
                 outputmode="scalar", verbose=verbose)
             cpu_load = psutil.cpu_percent(interval=1)
             if n < parallelism or cpu_load < max_load:
-                self.executeJob(job["jid"])
+                self.executeJob(job["jid"], filter)
 
-    def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, filter = "", verbose=False):
+    def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, white_list = "", verbose=False):
         """
         ProcessQueueForever
         """
         while True:
-            self.ProcessQueue(parallelism, max_load, verbose=verbose)
+            self.ProcessQueue(parallelism, max_load, white_list, verbose=verbose)
             sleep(interval)
 
