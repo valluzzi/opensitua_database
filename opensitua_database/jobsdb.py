@@ -122,17 +122,20 @@ class JobsDB(SqliteDB):
                 params["pid"] = p.pid
                 params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
                 params["status"] = "running"
+                params["progress"] = 0
             except Exception as ex:
                 params["pid"] = -1
                 params["status"] = "error"
+                params["progress"] = 100
                 params["starttime"] = ""
         else:
             params["pid"] = -1
             params["status"] = "error"
+            params["progress"] = 100
             params["starttime"] = ""
 
 
-        sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress=0, starttime='{starttime}' WHERE jid='{jid}';"""
+        sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress={progress}, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
 
     def ProcessQueue(self, parallelism = -1, max_load = 70, white_list = "", verbose = False):
