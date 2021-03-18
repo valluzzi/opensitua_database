@@ -77,7 +77,7 @@ class JobsDB(SqliteDB):
 
         env = {
             "jid":"0000",
-            "pid":os.getpid(),
+            "pid":-1,
             "type":"generic",
             "user":"unknown",
             "case_study":"",
