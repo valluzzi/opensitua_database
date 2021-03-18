@@ -67,7 +67,7 @@ class JobsDB(SqliteDB):
         """
         get_pid
         """
-        pid = db.execute("""SELECT [pid] FROM [jobs] WHERE [jid]='{jid}';""", params, outputmode="scalar", verbose=verbose)
+        pid =self.execute("""SELECT [pid] FROM [jobs] WHERE [jid]='{jid}';""", params, outputmode="scalar", verbose=verbose)
         return pid if pid else -1
 
     def add_job(self, params, verbose=False):
@@ -145,7 +145,7 @@ class JobsDB(SqliteDB):
                     WHERE [case_study] = '{case_study}'
                     AND [user] = '{__username__}'
                     ORDER BY [inserttime] ASC ;"""
-        res = db.execute(sql, params, outputmode="row-response", verbose = verbose)
+        res = self.execute(sql, params, outputmode="row-response", verbose = verbose)
         if "metadata" in res:
             res["columns"] = [{"id": "%s" % item[0], "header": "%s" % item[0]} for item in res["metadata"]]
             del res["metadata"]
