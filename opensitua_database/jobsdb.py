@@ -153,7 +153,7 @@ class JobsDB(SqliteDB):
                 outputmode="scalar", verbose=verbose)
             cpu_load = psutil.cpu_percent(interval=1)
             if n < parallelism or cpu_load < max_load:
-                self.executeJob(job["jid"], filter)
+                self.executeJob(job["jid"], white_list)
 
     def ProcessQueueForever(self, parallelism = -1, max_load = 70, interval = 3, white_list = "", verbose=False):
         """
