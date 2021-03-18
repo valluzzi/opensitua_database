@@ -1,7 +1,7 @@
 import os,re
 import setuptools
 
-VERSION         =  "0.0.101"
+VERSION         =  "0.0.102"
 
 PACKAGE_NAME    = "opensitua_database"
 AUTHOR          = "Valerio Luzzi"

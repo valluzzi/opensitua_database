@@ -95,7 +95,7 @@ class JobsDB(SqliteDB):
 
         # -- Security filter to allow just commands in white_list ------------------------------------------------------
         if command:
-            commandname = "%s"%(command.split(command," ")[0])
+            commandname = command.split(" ",1)[0]
             if not commandname.lower() in white_list:
                 command = None
                 params["pid"] = -1
