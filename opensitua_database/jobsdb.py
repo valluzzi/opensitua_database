@@ -167,6 +167,7 @@ class JobsDB(SqliteDB):
         if command:
             commandname = command.split(" ",1)[0]
             white_list = listify(white_list)
+            white_list = [item.lower() for item in white_list]
             if not commandname.lower() in white_list:
                 command = ""
                 params["pid"] = -1
