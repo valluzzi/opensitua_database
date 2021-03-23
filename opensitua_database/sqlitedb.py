@@ -65,7 +65,7 @@ class SqliteDB(AbstractDB):
         pragma
         """
         try:
-            text = text.format(**env)
+            text = sformat(text,env)
             if verbose:
                 print("PRAGMA " + text)
             self.conn.execute("PRAGMA " + text)

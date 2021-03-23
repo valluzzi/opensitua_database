@@ -35,7 +35,7 @@ class PostgresDB(AbstractDB):
         """
         Constructor
         """
-        self.dsn = dsn.format(**env)
+        self.dsn = sformat(dsn,env)
         self.conn = None
         self.__connect__()
 
