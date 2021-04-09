@@ -74,23 +74,25 @@ class JobsDB(SqliteDB):
         """
         addUser
         """
-
-        env = {
-            "jid":"0000",
-            "pid":-1,
-            "type":"generic",
-            "user":"unknown",
-            "case_study":"",
-            "description":"...",
-            "command":"",
-            "status":"ready",
-            "progress":0.0,
-            "precond_jid": 0,
-        }
-        env.update(params)
-        sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type], [case_study],    [description],  [command],  [status], [progress]) 
-                                      VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{case_study}', '{description}','{command}','{status}','{progress}')"""
-        self.execute(sql, env, verbose=verbose)
+        jobs = listify(params)
+        for job in jobs:
+            env = {
+                "jid":"0000",
+                "pid":-1,
+                "type":"generic",
+                "user":"unknown",
+                "case_study":"",
+                "description":"...",
+                "command":"",
+                "status":"ready",
+                "progress":0.0,
+                "precond_jid": 0,
+            }
+            env.update(job)
+            sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type], [case_study],    [description],  [command],  [status], [progress]) 
+                                          VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{case_study}', '{description}','{command}','{status}','{progress}')"""
+            self.execute(sql, env, verbose=verbose)
+        return self
 
     def remove_job(self, params, verbose=False):
         """
@@ -102,6 +104,7 @@ class JobsDB(SqliteDB):
         env.update(params)
         kill_process(self.get_pid(env))
         self.execute("""DELETE FROM [jobs] WHERE [jid]='{jid}';""", env, verbose=verbose)
+        return self
 
     def remove_all(self, params, verbose=False):
         """
@@ -116,6 +119,7 @@ class JobsDB(SqliteDB):
         for (pid,) in pids:
             kill_process(pid)
         self.execute("""DELETE FROM [jobs] WHERE [user]='{__username__}';""", env, verbose=verbose)
+        return self
 
     def start_job(self, params, verbose=False):
         """
@@ -123,6 +127,7 @@ class JobsDB(SqliteDB):
         """
         params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
         self.execute("UPDATE [jobs] SET status='queued', progress=0, starttime='{starttime}' WHERE jid='{jid}';", params, verbose=verbose)
+        return self
 
     def stop_job(self, params, verbose=False):
         """
@@ -134,6 +139,7 @@ class JobsDB(SqliteDB):
             params["endtime"] = strftime('%Y-%m-%d %H:%M:%S', None)
             sql = """UPDATE [jobs] SET status='{status}', progress=100, endtime='{endtime}' WHERE jid='{jid}';"""
             self.execute(sql, params, verbose=verbose)
+        return self
 
     def list(self, params, verbose=False):
         """
@@ -208,6 +214,7 @@ class JobsDB(SqliteDB):
 
         sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress={progress}, starttime='{starttime}' WHERE jid='{jid}';"""
         self.execute(sql, params)
+        return self
 
     def ProcessQueue(self, parallelism = -1, max_load = 70, white_list = "", verbose = False):
         """
