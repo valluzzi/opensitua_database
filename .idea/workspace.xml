@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="3910d6fa-cc4a-4772-89c8-7a6b9b9eebcd" name="Default Changelist" comment="some fix in module job">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/abstractdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/abstractdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/jobsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/jobsdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/settingsdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/settingsdb.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/sqlite_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/opensitua_database/usersdb.py" beforeDir="false" afterPath="$PROJECT_DIR$/opensitua_database/usersdb.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,5 +131,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="+ Postgres basic support" />
     <option name="LAST_COMMIT_MESSAGE" value="+ Postgres basic support" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/opensitua_database/jobsdb.py</url>
+          <line>40</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

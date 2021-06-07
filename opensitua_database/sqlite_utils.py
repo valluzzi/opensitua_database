@@ -33,3 +33,5 @@ def sqlite_md5(text):
         hash.update(text.encode("utf-8"))
         return hash.hexdigest()
     return None
+
+

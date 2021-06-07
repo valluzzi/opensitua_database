@@ -261,7 +261,7 @@ class AbstractDB:
         Make a query statetment
         """
         cursor = self.__get_cursor__()
-        line = format(sql,env)
+        line = sformat(sql,env)
         try:
             t1 = time.time()
             cursor.executemany(line, values)

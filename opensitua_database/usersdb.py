@@ -84,14 +84,15 @@ class UsersDB(SqliteDB):
             "name": name if name else mail,
             "password": password,
             "role":role,
+            "token":sqlite_md5(f"{mail}{password}"),
             "enabled":1 if enabled else 0,
             "url":url
         }
-        sql= """
-        INSERT OR IGNORE INTO [users]([mail],[name],[token],[role],[enabled]) VALUES('{mail}','{name}',md5('{mail}'||'{password}'),'{role}',{enabled});
-        SELECT [token] FROM   [users] WHERE [name] ='{name}' AND [mail]='{mail}';
-        """
-        __token__ = self.execute(sql, env, outputmode="scalar", verbose=verbose)
+        sql = "INSERT OR IGNORE INTO [users]([mail],[name],[token],[role],[enabled]) VALUES(?,?,?,?,?);"
+        # def executeMany(self, sql, env={}, values=[], commit=True, verbose=False):
+        self.executeMany(sql, env, [( env["mail"], env["name"], env["token"], env["role"], env["enabled"] )])
+
+        __token__ = self.execute("SELECT [token] FROM [users] WHERE hex([name])=hex('{name}') AND hex([mail])=hex('{mail}');", env, outputmode="scalar", verbose=verbose)
         env["__token__"] = __token__
 
         if sendmail:
@@ -105,7 +106,7 @@ class UsersDB(SqliteDB):
         """
         name
         """
-        sql ="""SELECT COUNT(*) FROM [users] WHERE [mail] = '{mail}';"""
+        sql ="""SELECT COUNT(*) FROM [users] WHERE hex([mail]) = hex('{mail}');"""
         count = self.execute(sql, {"name":name,"mail":mail}, outputmode="scalar")
         return count>0
 
@@ -122,7 +123,7 @@ class UsersDB(SqliteDB):
         #Abilita l'utente e gli cambia il token
 
         sql = """
-        UPDATE [users] SET [enabled]={enabled},[token]=md5([mail]||'{password}') WHERE [token]='{token}';
+        UPDATE [users] SET [enabled]={enabled},[token]=md5([mail]||'{password}') WHERE hex([token])=hex('{token}');
         SELECT [mail],[name],[enabled],md5([mail]||'{password}') as [token] FROM [users]  WHERE [token]=md5([mail]||'{password}');
         """
         (mail,name,enabled,token) = self.execute(sql, env, outputmode='first-row', verbose=verbose)
@@ -164,7 +165,7 @@ class UsersDB(SqliteDB):
         }
         sql = """
         SELECT md5([token]||strftime('%Y-%m-%d','now')) FROM [users]
-            WHERE [mail] = '{username}'
+            WHERE hex([mail]) = hex('{username}')
             AND [token] LIKE md5([mail]||'{password}')
             AND [enabled];
         """
@@ -179,7 +180,10 @@ class UsersDB(SqliteDB):
             "__token__": token
         }
         sql = """
-        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' FROM [users] WHERE [mail] = '{__username__}' LIMIT 1;
+        SELECT md5([token]||strftime('%Y-%m-%d','now'))='{__token__}' 
+        FROM [users] 
+            WHERE hex([mail])=hex('{__username__}') 
+            LIMIT 1;
         """
         return self.execute(sql, env, outputmode="scalar", verbose=False)
 
@@ -194,8 +198,8 @@ class UsersDB(SqliteDB):
             "service": service
         }
         sql = """
-              UPDATE [users] SET [token]=md5([mail]||'{password}') WHERE [mail] = '{mail}';
-              SELECT [name] FROM [users] WHERE [mail] = '{mail}';
+              UPDATE [users] SET [token]=md5([mail]||'{password}') WHERE hex([mail])=hex('{mail}');
+              SELECT [name] FROM [users] WHERE hex([mail]) = hex('{mail}');
         """
         env["name"] = self.execute(sql, env, outputmode="scalar")
 

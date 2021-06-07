@@ -67,7 +67,7 @@ class JobsDB(SqliteDB):
         """
         get_pid
         """
-        pid =self.execute("""SELECT [pid] FROM [jobs] WHERE [jid]='{jid}';""", params, outputmode="scalar", verbose=verbose)
+        pid =self.execute("""SELECT [pid] FROM [jobs] WHERE hex([jid])=hex('{jid}');""", params, outputmode="scalar", verbose=verbose)
         return pid if pid else -1
 
     def add_job(self, params, verbose=False):
@@ -89,9 +89,10 @@ class JobsDB(SqliteDB):
                 "precond_jid": 0,
             }
             env.update(job)
-            sql= """INSERT OR IGNORE INTO [jobs](  [jid],  [user],  [pid],  [precond_jid], [type], [case_study],    [description],  [command],  [status], [progress]) 
-                                          VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{case_study}', '{description}','{command}','{status}','{progress}')"""
-            self.execute(sql, env, verbose=verbose)
+            #sql= """INSERT OR IGNORE INTO [jobs]([jid], [user], [pid], [precond_jid], [type], [case_study], [description], [command], [status], [progress]) VALUES('{jid}','{user}','{pid}','{precond_jid}','{type}','{case_study}', '{description}','{command}','{status}','{progress}')"""
+            #self.execute(sql, env, verbose=verbose)
+            sql = """INSERT OR IGNORE INTO [jobs]([jid], [user], [pid], [precond_jid], [type], [case_study], [description], [command], [status], [progress]) VALUES(?,?,?,?,?,?,?,?,?,?);"""
+            self.executeMany(sql, env, [(env["jid"], env["user"], env["pid"], env["precond_jid"], env["type"], env["case_study"], env["description"], env["command"], env["status"], env["progress"])], verbose=verbose)
         return self
 
     def remove_job(self, params, verbose=False):
@@ -103,7 +104,7 @@ class JobsDB(SqliteDB):
         }
         env.update(params)
         kill_process(self.get_pid(env))
-        self.execute("""DELETE FROM [jobs] WHERE [jid]='{jid}';""", env, verbose=verbose)
+        self.execute("""DELETE FROM [jobs] WHERE hex([jid])=hex('{jid}');""", env, verbose=verbose)
         return self
 
     def remove_all(self, params, verbose=False):
@@ -114,11 +115,11 @@ class JobsDB(SqliteDB):
         }
         env.update(params)
         pids = self.execute(
-            """SELECT [pid] FROM [jobs] WHERE [user]='{__username__}' and status NOT IN ('ready','queued','error');""",
+            """SELECT [pid] FROM [jobs] WHERE hex([user])=hex('{__username__}') and status NOT IN ('ready','queued','error');""",
             env, outputmode="array", verbose=verbose)
         for (pid,) in pids:
             kill_process(pid)
-        self.execute("""DELETE FROM [jobs] WHERE [user]='{__username__}';""", env, verbose=verbose)
+        self.execute("""DELETE FROM [jobs] WHERE hex([user])=hex('{__username__}');""", env, verbose=verbose)
         return self
 
     def start_job(self, params, verbose=False):
@@ -126,7 +127,7 @@ class JobsDB(SqliteDB):
         start_job
         """
         params["starttime"] = strftime('%Y-%m-%d %H:%M:%S', None)
-        self.execute("UPDATE [jobs] SET status='queued', progress=0, starttime='{starttime}' WHERE jid='{jid}';", params, verbose=verbose)
+        self.execute("UPDATE [jobs] SET status='queued', progress=0, starttime='{starttime}' WHERE hex(jid)=hex('{jid}');", params, verbose=verbose)
         return self
 
     def stop_job(self, params, verbose=False):
@@ -137,7 +138,7 @@ class JobsDB(SqliteDB):
         if kill_process(pid):
             params["status"] = "stopped"
             params["endtime"] = strftime('%Y-%m-%d %H:%M:%S', None)
-            sql = """UPDATE [jobs] SET status='{status}', progress=100, endtime='{endtime}' WHERE jid='{jid}';"""
+            sql = """UPDATE [jobs] SET status='{status}', progress=100, endtime='{endtime}' WHERE hex(jid)=hex('{jid}');"""
             self.execute(sql, params, verbose=verbose)
         return self
 
@@ -148,8 +149,8 @@ class JobsDB(SqliteDB):
         sql = """SELECT *,
                     ((julianday( IFNULL(endtime,datetime('now','localtime')) ) - julianday(starttime)) * 86400.0) as [runtime]
                     FROM [jobs]
-                    WHERE [case_study] = '{case_study}'
-                    AND [user] = '{__username__}'
+                    WHERE hex([case_study]) = hex('{case_study}')
+                    AND hex([user]) = hex('{__username__}')
                     ORDER BY [inserttime] ASC ;"""
         res = self.execute(sql, params, outputmode="row-response", verbose = verbose)
         if "metadata" in res:
@@ -165,8 +166,8 @@ class JobsDB(SqliteDB):
         """
         params ={"jid" : jid}
 
-        sql = """UPDATE [jobs] SET status='running',progress=0 WHERE jid='{jid}';
-                 SELECT [command] FROM [jobs] WHERE [jid]='{jid}' and status='running';"""
+        sql = """UPDATE [jobs] SET status='running',progress=0 WHERE hex(jid)=hex('{jid}');
+                 SELECT [command] FROM [jobs] WHERE hex([jid])=hex('{jid}') and status='running';"""
         command = self.execute(sql, params, outputmode="scalar")
 
         # -- Security filter to allow just commands in white_list ------------------------------------------------------
@@ -212,7 +213,7 @@ class JobsDB(SqliteDB):
             params["starttime"] = ""
 
 
-        sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress={progress}, starttime='{starttime}' WHERE jid='{jid}';"""
+        sql = """UPDATE [jobs] SET status='{status}', pid='{pid}', progress={progress}, starttime='{starttime}' WHERE hex(jid)=hex('{jid}');"""
         self.execute(sql, params)
         return self
 

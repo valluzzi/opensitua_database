@@ -71,7 +71,7 @@ class SettingsDB(SqliteDB):
         """
         get - get a key, value
         """
-        (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE [key] LIKE '{key}' AND [groupname]='{groupname}' LIMIT 1;""",{"key":key,"groupname":groupname},outputmode="first-row")
+        (value,type) = self.execute("""SELECT [value],[type] FROM [settings] WHERE hex(UPPER([key])) = hex(UPPER('{key}')) AND hex([groupname])=hex('{groupname}') LIMIT 1;""",{"key":key,"groupname":groupname},outputmode="first-row")
         type = lower(type)
         if type == "string":
             return "%s"%value
